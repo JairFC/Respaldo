@@ -1,0 +1,125 @@
+MySQL Shell 1.0.11
+
+Copyright (c) 2016, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+Currently in JavaScript mode. Use \sql to switch to SQL mode and execute queries.
+mysql-js> \sql
+Switching to SQL mode... Commands end with ;
+mysql-sql> \connect -c root@localhost
+Creating a Classic Session to 'root@localhost'
+Enter password:
+Your MySQL connection id is 5
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> create database mi_primer_basedatos;
+Query OK, 1 row affected (0.00 sec)
+mysql-sql> use mi_primer_basedatos;
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> show tables;
+Empty set (0.00 sec)
+mysql-sql> show tables;
++-------------------------------+
+| Tables_in_mi_primer_basedatos |
++-------------------------------+
+| mi_tabla                      |
++-------------------------------+
+1 row in set (0.01 sec)
+mysql-sql> drop database if exist mi_primer_basedatos;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'exist mi_primer_basedatos' at line 1
+mysql-sql> drop database if exists mi_primer_basedatos;
+Query OK, 1 row affected (0.47 sec)
+mysql-sql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| inventario         |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| practica2azteca    |
+| test               |
++--------------------+
+7 rows in set (0.00 sec)
+mysql-sql> create database mundo;
+Query OK, 1 row affected (0.00 sec)
+mysql-sql> create user 'mundo'@'localhost'
+       ... ;
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> create user 'jair'@'localhost'identified by '123';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> grant all privileges on mundo.* to 'jair'@'localhost' with grant option;
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> \connect -c jair@localhost
+Creating a Classic Session to 'jair@localhost'
+Enter password: ***
+Closing old connection...
+Your MySQL connection id is 8
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mundo              |
+| test               |
++--------------------+
+3 rows in set (0.00 sec)
+mysql-sql> create table paises(
+       ... paises_id;
+ERROR: 1046 (3D000): No database selected
+mysql-sql> use mundo;
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> create table paises(
+       ... paises_id int,
+       ... nombre varchar(50),
+       ... poblacion int,
+       ... capital varchar(50));
+Query OK, 0 rows affected (0.21 sec)
+mysql-sql> show tables;
++-----------------+
+| Tables_in_mundo |
++-----------------+
+| paises          |
++-----------------+
+1 row in set (0.00 sec)
+mysql-sql> desc paises;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| paises_id | int(11)     | YES  |     | null    |       |
+| nombre    | varchar(50) | YES  |     | null    |       |
+| poblacion | int(11)     | YES  |     | null    |       |
+| capital   | varchar(50) | YES  |     | null    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+mysql-sql> select * from paises;
+Empty set (0.00 sec)
+mysql-sql> create table paises_copia like paises;
+Query OK, 0 rows affected (0.25 sec)
+mysql-sql> show tables;
++-----------------+
+| Tables_in_mundo |
++-----------------+
+| paises          |
+| paises_copia    |
++-----------------+
+2 rows in set (0.00 sec)
+mysql-sql> desc paises_copia;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| paises_id | int(11)     | YES  |     | null    |       |
+| nombre    | varchar(50) | YES  |     | null    |       |
+| poblacion | int(11)     | YES  |     | null    |       |
+| capital   | varchar(50) | YES  |     | null    |       |
++-----------+-------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+mysql-sql>

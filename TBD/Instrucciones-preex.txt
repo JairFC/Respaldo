@@ -1,0 +1,270 @@
+1. Crear una nueva base de datos llamada ejercicios. 
+Crear un usuario usu_eva1 con todos los privilegios sobre dicha base de datos. 
+Utilizarlo para todos los ejercicios planteados a continuación.
+
+
+create database ejercicios;
+create user 'usu_eva1'@'localhost'identified by '123';
+grant all privileges on ejercicios.* to 'usu_eva1'@'localhost' with grant option;
+
+
+2. Crear una instrucción SQL que cree una tabla llamada alumno,
+ que incluya las columnas alumno_id, nom_alumno, ape_pat_alumno,
+ ape_mat_alumno, no_control_alumno. Determine los mejores tipos de datos para cada campo. 
+
+
+ create table alumno(
+       ... alumno_id int,
+       ... nom_alumno varchar(50),
+       ... ape_pat_alumno varchar(50),
+       ... ape_mat_alumno varchar(50),
+       ... no_control_alumno int);
+
+
+
+3. Crear la misma tabla del ejercicio anterior, 
+pero agregar la clausula IF EXISTS para verificar
+ si la tabla ha sido creada previamente. 
+
+
+ create table if not exists alumno(
+       ... alumno_id int,
+       ... nom_alumno varchar(50),
+       ... ape_pat_alumno varchar(50),
+       ... ape_mat_alumno varchar(50),
+       ... no_control_alumno int);
+
+
+4. Crear un duplicado de la tabla alumno llamada dup_alumno,
+ con los mismos campos. 
+
+
+create table dup_alumno like alumno;
+
+
+
+5. Agregar 5 campos a la tabla alumno, 
+crear una copia de la tabla alumno con TODOS sus datos y estructura. 
+
+
+ insert into alumno values(1,'Jair','Franco','Cruz',15551496);
+Query OK, 1 row affected (0.08 sec)
+mysql-sql> insert into alumno values(2,'Alex','Perez','Martinez',15332454);
+Query OK, 1 row affected (0.06 sec)
+mysql-sql> insert into alumno values(3,'Juan','Hernandez','Hernandez',15343344);
+Query OK, 1 row affected (0.08 sec)
+mysql-sql> insert into alumno values(4,'Alfonzo','Hernandez','Pacheco',15433320);
+Query OK, 1 row affected (0.08 sec)
+mysql-sql> insert into alumno values(5,'Luis','Armando','Andrade',18786545);
+Query OK, 1 row affected (0.09 sec)
+
+
+create table ejercicios.copia_alumno as select * from ejercicios.alumno;
+
+
+
+6. Crear una tabla carrera con los campos carrera_id,
+ nombre_carrera, créditos_carrera, 
+donde todos los campos NO permitan valores nulos. 
+
+
+create table carrera(
+       ... carrera_id int not null,
+       ... nombre_carrera varchar(50) not null,
+       ... creditos_carrera int not null);
+
+
+
+7. Crear una tabla docentes con los campos docentes_id,
+ nombre_docente, apellido_pat_docente, apellido_mat_docente, 
+horas_plaza, departamento_docente, 
+donde todos los campos NO deben aceptar valores nulos 
+y el campo horas_plaza debe tener por default el valor de 8 (8 horas).
+ El campo departamento_docente solo debe aceptar los siguientes departamentos:
+ Sistemas y computación, Ingeniería Industrial, Ciencias de la Tierra, 
+Ciencias Económico Administrativas, Ciencias Básicas.
+
+
+
+
+create table docentes(
+       ... docente_id int not null,
+       ...  nombre_docente varchar(50) not null,
+       ... apellido_pat_docente varchar(50) not null,
+       ... apellido_mat_docente varchar(50) not null,
+       ... horas_plaza int not null default 8,
+       ... departamento_docente ENUM('Sistemas y computación','Ingeniería Industrial','Ciencias de la tierra','Ciencias Económico Administrativas','Ciencias Básicas') not null);
+Query OK, 0 rows affected (0.25 sec)
+mysql-sql> desc docentes;
++----------------------+----------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field                | Type                                                                                                                                   | Null | Key | Default | Extra |
++----------------------+----------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+| docente_id           | int(11)                                                                                                                                | NO   |     | null    |       |
+| nombre_docente       | varchar(50)                                                                                                                            | NO   |     | null    |       |
+| apellido_pat_docente | varchar(50)                                                                                                                            | NO   |     | null    |       |
+| apellido_mat_docente | varchar(50)                                                                                                                            | NO   |     | null    |       |
+| horas_plaza          | int(11)                                                                                                                                | NO   |     | 8       |       |
+| departamento_docente | enum('Sistemas y computación','Ingeniería Industrial','Ciencias de la tierra','Ciencias Económico Administrativas','Ciencias Básicas') | NO   |     | null    |       |
++----------------------+----------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+mysql-sql>
+
+
+
+
+8. Crear una tabla institutos con los campos instituto_id, nombre_instituto, 
+estado_instituto, donde el estado sea uno de los 32 estados del país.
+El nombre del instituto debe ser ÚNICO. 
+
+
+create table institutos(
+
+	instituto_id int,
+	nombre_instituto varchar(50) unique,
+	estado_instituto ENUM('Aguascalientes','Baja California','Baja California Sur','Campeche','Coahuila','Colima','Chiapas','Chihuahua','DF','Durango','Guanajuato','Guerrero','Hidalgo','Guadalajara','Mexico','Michoacan','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Queretaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Zacatecas'));
+
+
+
+	create table institutos(
+       ... instituto_id int,
+       ... nombre_instituto varchar(50) unique,
+       ... estado_instituto ENUM('Aguascalientes','Baja California','Baja California Sur','Campeche','Coahuila','Colima','Chiapas','Chihuahua','DF','Durango','Guanajuato','Guerrero','Hidalgo','Guadalajara','Mexico','Michoacan','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Queretaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Zacatecas'));
+	Query OK, 0 rows affected (0.17 sec)
+	mysql-sql> show tables;
+	+----------------------+
+	| Tables_in_ejercicios |
+	+----------------------+
+	| alumno               |
+	| carrera              |
+	| copia_alumno         |
+	| docentes             |
+	| dup_alumno           |
+	| institutos           |
+	+----------------------+
+	6 rows in set (0.00 sec)
+mysql-sql> desc institutos;
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+| Field            | Type                                                                                                                                                                                                                                                                                                                                                                                | Null | Key | Default | Extra |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+| instituto_id     | int(11)                                                                                                                                                                                                                                                                                                                                                                             | YES  |     | null    |       |
+| nombre_instituto | varchar(50)                                                                                                                                                                                                                                                                                                                                                                         | YES  | UNI | null    |       |
+| estado_instituto | enum('Aguascalientes','Baja California','Baja California Sur','Campeche','Coahuila','Colima','Chiapas','Chihuahua','DF','Durango','Guanajuato','Guerrero','Hidalgo','Guadalajara','Mexico','Michoacan','Morelos','Nayarit','Nuevo León','Oaxaca','Puebla','Queretaro','Quintana Roo','San Luis Potosí','Sinaloa','Sonora','Tabasco','Tamaulipas','Tlaxcala','Veracruz','Zacatecas') | YES  |     | null    |       |
++------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+
+
+9. Modificar la tabla alumno, y hacer que el campo no_control_alumno sea único y no nulo. 
+
+
+
+mysql-sql> alter table alumno change no_control_alumno no_control_alumno varchar(50) unique not null;
+Query OK, 5 rows affected (0.92 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+mysql-sql> desc alumno;
++-------------------+-------------+------+-----+---------+-------+
+| Field             | Type        | Null | Key | Default | Extra |
++-------------------+-------------+------+-----+---------+-------+
+| alumno_id         | int(11)     | YES  |     | null    |       |
+| nom_alumno        | varchar(50) | YES  |     | null    |       |
+| ape_pat_alumno    | varchar(50) | YES  |     | null    |       |
+| ape_mat_alumno    | varchar(50) | YES  |     | null    |       |
+| no_control_alumno | varchar(50) | NO   | PRI | null    |       |
++-------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+mysql-sql>
+
+
+
+
+
+10. Modificar la tabla alumno, y renombrar los campos nom_alumno, ape_pat_alumno, ape_mat_alumno con los nombres nombre_alumno,
+ apellido_pat_alumno, apellido_mat_alumno. 
+
+
+mysql-sql> alter table alumno change nom_alumno nombre_alumno varchar(50);
+Query OK, 0 rows affected (0.09 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+mysql-sql> alter table alumno change ape_pat_alumno apellido_pat_alumno varchar(50);
+Query OK, 0 rows affected (0.09 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+mysql-sql> alter table alumno change ape_mat_alumno apellido_mat_alumno varchar(50);
+Query OK, 0 rows affected (0.09 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+mysql-sql>  desc alumno;
++---------------------+-------------+------+-----+---------+-------+
+| Field               | Type        | Null | Key | Default | Extra |
++---------------------+-------------+------+-----+---------+-------+
+| alumno_id           | int(11)     | YES  |     | null    |       |
+| nombre_alumno       | varchar(50) | YES  |     | null    |       |
+| apellido_pat_alumno | varchar(50) | YES  |     | null    |       |
+| apellido_mat_alumno | varchar(50) | YES  |     | null    |       |
+| no_control_alumno   | varchar(50) | NO   | PRI | null    |       |
++---------------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+mysql-sql>
+
+
+
+
+
+11. Modificar TODAS las tablas anteriores, para que el campo id sea la llave primaria, no nula y auto incremental.
+
+
+
+mysql-sql> alter table alumno change alumno_id alumno_id int not null key auto_increment;
+Query OK, 5 rows affected (1.28 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+mysql-sql>
+
+mysql-sql>  alter table carrera change carrera_id carrera_id int not null key auto_increment;
+Query OK, 0 rows affected (0.64 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+mysql-sql>
+
+mysql-sql> alter table copia_alumno change alumno_id alumno_id int not null key auto_increment;
+Query OK, 5 rows affected (0.75 sec)
+
+Records: 5  Duplicates: 0  Warnings: 0
+mysql-sql>
+
+
+mysql-sql>  alter table docentes change docente_id docente_id int not null key auto_increment;
+Query OK, 0 rows affected (0.90 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql-sql> alter table institutos change instituto_id instituto_id int not null key auto_increment;
+Query OK, 0 rows affected (0.68 sec)
+
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+
+
+# mysqldump -u usu_eva1 -p ejercicios > ejerciciosBackup.sql
+
+
+13. Crear un respaldo de su base de datos que solo incluya la tabla alumnos. 
+
+# mysqldump -u usu_eva1 -p ejercicios alumno > ejerciciosAlumno.sql
+
+
+14. Crear un respaldo de su base de datos que solo incluya las tablas alumnos y carrera.
+
+
+# mysqldump -u usu_eva1 -p ejercicios alumno carrera > ejerciciosAlumno.sql
+
+
+
+
+
+
+

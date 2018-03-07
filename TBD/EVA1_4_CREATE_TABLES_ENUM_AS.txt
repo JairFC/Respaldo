@@ -1,0 +1,300 @@
+MySQL Shell 1.0.11
+
+Copyright (c) 2016, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+Currently in JavaScript mode. Use \sql to switch to SQL mode and execute queries.
+mysql-js> \sql
+Switching to SQL mode... Commands end with ;
+mysql-sql> \connect -c root@localhost
+Creating a Classic Session to 'root@localhost'
+Enter password:
+Your MySQL connection id is 2
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| inventario         |
+| mundo              |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| practica2azteca    |
+| test               |
++--------------------+
+8 rows in set (0.09 sec)
+mysql-sql> /use practica2azteca
+       ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '/use practica2azteca' at line 1
+mysql-sql> use practica2azteca;
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> show tables;
++---------------------------+
+| Tables_in_practica2azteca |
++---------------------------+
+| cliente                   |
+| cuenta                    |
+| cuenta_has_cliente        |
+| empleado                  |
+| sucursal                  |
+| tipocuenta                |
+| tipotransaccion           |
+| transaccion               |
++---------------------------+
+8 rows in set (0.00 sec)
+mysql-sql> select * from cliente;
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+| nocliente | nombre    | a_paterno  | a_materno   | direccion        | telefono   | cp    | rfc             |
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+|         0 | Pepito    | Carrasco   | Lopez       | por delicias     | 6391695544 | 31420 | CALP123123132   |
+|        10 | juan      | perez      | muller      | alemania         | 614552566  | 31135 | jupm1254        |
+|        69 | Mutombo   | Camerun    | triste      | Africa           | 6145698759 | 31666 | MC69874         |
+|       333 | juan      | peres      | peres       | ghjk             | 6141234567 | 5632  | vgbuhnj         |
+|       999 | Felix     | Gonzalez   | Orta        | Madrid           | 6144082547 | 31150 | GOOFHEFGKS      |
+|      1000 | juan      | lenon      | apellidom1  | rancho           | 614253     | 31250 | rfc1            |
+|      1044 | javier    | martinez   | sanchez     | 94               | 6145552369 | 45885 | saljdhfwiug     |
+|      1052 | mitchel   | acosta     | martinez    | lord byron       | 6145104364 | 45864 | asa547          |
+|      1234 | dada      | ati        | on          | 122              | 6124521    | e3122 | afej3oj±o       |
+|      1235 | andres    | Lopez      | obrador     | serca de la caja | 658485612  | 32185 | FGASD6543       |
+|      1505 | jose      | lopez      | estrada     | villa juarez     | 6142365896 | 31027 | 16654dff        |
+|      1546 | Valeria   | Lopez      | Arizpe      | sq               | 6391383530 | 34567 | fsdkfhd±s       |
+|      2000 | pedrfo    | gallo      | apellidom   | ctm              | 61452556   | 31207 | gsh             |
+|      2005 | David     | Oscar      | Schartws    | oscar            | 614168798  | 31125 | JBHDVSJHA45     |
+|      2013 | Ana       | Torres     | Rodriguez   | Los mochis       | 6143586332 | 31124 | ASD9719381DAJR  |
+|      2105 | martin    | carrasco   | jaquez      | balleza          | 6361105584 | 31125 | MCA11234        |
+|      2345 | hector    | morales    | solar       | alcas            | 1543185131 | 15645 | sddefg          |
+|      2828 | Fayre     | Alcudia    | Juarez      | jeje             | 6141234567 | 31060 | erfnj           |
+|      3000 | yuleini   | terrazas   | parada      | herradura        | 6141980972 | 31385 | tepy960427      |
+|      3005 | Kirito    | kun        | nico        | calle            | 6144444444 | 31144 | KMJDSBFHJDS5    |
+|      4000 | Stephanie | Hernandez  | Dominguez   | acequias         | 6144474649 | 13202 | DORS14          |
+|      5463 | luisa     | hernandez  | rodriguez   | villa            | 6147896512 | 31475 | dgs546576ds     |
+|      6000 | orlando   | orozco     | terrazas    | paseosfrisson    | 12345678   | 31589 | oorg170623      |
+|      7365 | juan      | hernandez  | de la rosa  | cdp              | 6145789435 | 31140 | dhf56435aa      |
+|      8000 | oscar     | estrada    | herrera     | 29               | 6141977383 | 31350 | eaho940114      |
+|     10000 | pepe      | picas      | papas       | fresas           | 6149876954 | 02589 | pipape          |
+|     11000 | victor    | silva      | llanas      | ranchomendio     | 6141234567 | 31106 | sillav          |
+|     15610 | Uziel     | Perez      | Campillo    | dolres           | 6251114734 | 1564  | slkdfsjkh       |
+|     52654 | Rodrigo   | Lopez      | Luna        | algun lado       | 6144234234 | 54234 | xddxdxdxdxdxdxd |
+|     53652 | David     | Gonzales   | Tinajero    | Av. Industrias   | 6141234567 | 32145 | GOTD23156FDSFG  |
+|    111111 | Valoo     | Lopez      | Avizpon     | Quinta sebastian | 6391383530 | 3153  | VAL2344         |
+|    117007 | Miguel    | Gonzales   | De la Garza | Pascual          | 614254897  | 32154 | MGDG1545        |
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+32 rows in set (0.06 sec)
+mysql-sql> create table mundo.copia_cliente as select * from practica2azteca.cliente;
+Query OK, 32 rows affected (0.40 sec)
+
+Records: 32  Duplicates: 0  Warnings: 0
+mysql-sql> use mundo;
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> show tables;
++-----------------+
+| Tables_in_mundo |
++-----------------+
+| copia_cliente   |
+| paises          |
+| paises_copia    |
++-----------------+
+3 rows in set (0.00 sec)
+mysql-sql> select * from copia_paises
+       ... ;
+ERROR: 1146 (42S02): Table 'mundo.copia_paises' doesn't exist
+mysql-sql> select * from copia_cliente;
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+| nocliente | nombre    | a_paterno  | a_materno   | direccion        | telefono   | cp    | rfc             |
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+|         0 | Pepito    | Carrasco   | Lopez       | por delicias     | 6391695544 | 31420 | CALP123123132   |
+|        10 | juan      | perez      | muller      | alemania         | 614552566  | 31135 | jupm1254        |
+|        69 | Mutombo   | Camerun    | triste      | Africa           | 6145698759 | 31666 | MC69874         |
+|       333 | juan      | peres      | peres       | ghjk             | 6141234567 | 5632  | vgbuhnj         |
+|       999 | Felix     | Gonzalez   | Orta        | Madrid           | 6144082547 | 31150 | GOOFHEFGKS      |
+|      1000 | juan      | lenon      | apellidom1  | rancho           | 614253     | 31250 | rfc1            |
+|      1044 | javier    | martinez   | sanchez     | 94               | 6145552369 | 45885 | saljdhfwiug     |
+|      1052 | mitchel   | acosta     | martinez    | lord byron       | 6145104364 | 45864 | asa547          |
+|      1234 | dada      | ati        | on          | 122              | 6124521    | e3122 | afej3oj±o       |
+|      1235 | andres    | Lopez      | obrador     | serca de la caja | 658485612  | 32185 | FGASD6543       |
+|      1505 | jose      | lopez      | estrada     | villa juarez     | 6142365896 | 31027 | 16654dff        |
+|      1546 | Valeria   | Lopez      | Arizpe      | sq               | 6391383530 | 34567 | fsdkfhd±s       |
+|      2000 | pedrfo    | gallo      | apellidom   | ctm              | 61452556   | 31207 | gsh             |
+|      2005 | David     | Oscar      | Schartws    | oscar            | 614168798  | 31125 | JBHDVSJHA45     |
+|      2013 | Ana       | Torres     | Rodriguez   | Los mochis       | 6143586332 | 31124 | ASD9719381DAJR  |
+|      2105 | martin    | carrasco   | jaquez      | balleza          | 6361105584 | 31125 | MCA11234        |
+|      2345 | hector    | morales    | solar       | alcas            | 1543185131 | 15645 | sddefg          |
+|      2828 | Fayre     | Alcudia    | Juarez      | jeje             | 6141234567 | 31060 | erfnj           |
+|      3000 | yuleini   | terrazas   | parada      | herradura        | 6141980972 | 31385 | tepy960427      |
+|      3005 | Kirito    | kun        | nico        | calle            | 6144444444 | 31144 | KMJDSBFHJDS5    |
+|      4000 | Stephanie | Hernandez  | Dominguez   | acequias         | 6144474649 | 13202 | DORS14          |
+|      5463 | luisa     | hernandez  | rodriguez   | villa            | 6147896512 | 31475 | dgs546576ds     |
+|      6000 | orlando   | orozco     | terrazas    | paseosfrisson    | 12345678   | 31589 | oorg170623      |
+|      7365 | juan      | hernandez  | de la rosa  | cdp              | 6145789435 | 31140 | dhf56435aa      |
+|      8000 | oscar     | estrada    | herrera     | 29               | 6141977383 | 31350 | eaho940114      |
+|     10000 | pepe      | picas      | papas       | fresas           | 6149876954 | 02589 | pipape          |
+|     11000 | victor    | silva      | llanas      | ranchomendio     | 6141234567 | 31106 | sillav          |
+|     15610 | Uziel     | Perez      | Campillo    | dolres           | 6251114734 | 1564  | slkdfsjkh       |
+|     52654 | Rodrigo   | Lopez      | Luna        | algun lado       | 6144234234 | 54234 | xddxdxdxdxdxdxd |
+|     53652 | David     | Gonzales   | Tinajero    | Av. Industrias   | 6141234567 | 32145 | GOTD23156FDSFG  |
+|    111111 | Valoo     | Lopez      | Avizpon     | Quinta sebastian | 6391383530 | 3153  | VAL2344         |
+|    117007 | Miguel    | Gonzales   | De la Garza | Pascual          | 614254897  | 32154 | MGDG1545        |
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+32 rows in set (0.00 sec)
+mysql-sql> create temporary table mundo.copia_cliente_temp as select * from practica2azteca.cliente;
+Query OK, 32 rows affected (0.17 sec)
+
+Records: 32  Duplicates: 0  Warnings: 0
+mysql-sql> \use mundo
+Schema set to `mundo`.
+mysql-sql> show tablaes;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'tablaes' at line 1
+mysql-sql> show tables;
++-----------------+
+| Tables_in_mundo |
++-----------------+
+| copia_cliente   |
+| paises          |
+| paises_copia    |
++-----------------+
+3 rows in set (0.00 sec)
+mysql-sql> select * from copia_cliente_temp;
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+| nocliente | nombre    | a_paterno  | a_materno   | direccion        | telefono   | cp    | rfc             |
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+|         0 | Pepito    | Carrasco   | Lopez       | por delicias     | 6391695544 | 31420 | CALP123123132   |
+|        10 | juan      | perez      | muller      | alemania         | 614552566  | 31135 | jupm1254        |
+|        69 | Mutombo   | Camerun    | triste      | Africa           | 6145698759 | 31666 | MC69874         |
+|       333 | juan      | peres      | peres       | ghjk             | 6141234567 | 5632  | vgbuhnj         |
+|       999 | Felix     | Gonzalez   | Orta        | Madrid           | 6144082547 | 31150 | GOOFHEFGKS      |
+|      1000 | juan      | lenon      | apellidom1  | rancho           | 614253     | 31250 | rfc1            |
+|      1044 | javier    | martinez   | sanchez     | 94               | 6145552369 | 45885 | saljdhfwiug     |
+|      1052 | mitchel   | acosta     | martinez    | lord byron       | 6145104364 | 45864 | asa547          |
+|      1234 | dada      | ati        | on          | 122              | 6124521    | e3122 | afej3oj±o       |
+|      1235 | andres    | Lopez      | obrador     | serca de la caja | 658485612  | 32185 | FGASD6543       |
+|      1505 | jose      | lopez      | estrada     | villa juarez     | 6142365896 | 31027 | 16654dff        |
+|      1546 | Valeria   | Lopez      | Arizpe      | sq               | 6391383530 | 34567 | fsdkfhd±s       |
+|      2000 | pedrfo    | gallo      | apellidom   | ctm              | 61452556   | 31207 | gsh             |
+|      2005 | David     | Oscar      | Schartws    | oscar            | 614168798  | 31125 | JBHDVSJHA45     |
+|      2013 | Ana       | Torres     | Rodriguez   | Los mochis       | 6143586332 | 31124 | ASD9719381DAJR  |
+|      2105 | martin    | carrasco   | jaquez      | balleza          | 6361105584 | 31125 | MCA11234        |
+|      2345 | hector    | morales    | solar       | alcas            | 1543185131 | 15645 | sddefg          |
+|      2828 | Fayre     | Alcudia    | Juarez      | jeje             | 6141234567 | 31060 | erfnj           |
+|      3000 | yuleini   | terrazas   | parada      | herradura        | 6141980972 | 31385 | tepy960427      |
+|      3005 | Kirito    | kun        | nico        | calle            | 6144444444 | 31144 | KMJDSBFHJDS5    |
+|      4000 | Stephanie | Hernandez  | Dominguez   | acequias         | 6144474649 | 13202 | DORS14          |
+|      5463 | luisa     | hernandez  | rodriguez   | villa            | 6147896512 | 31475 | dgs546576ds     |
+|      6000 | orlando   | orozco     | terrazas    | paseosfrisson    | 12345678   | 31589 | oorg170623      |
+|      7365 | juan      | hernandez  | de la rosa  | cdp              | 6145789435 | 31140 | dhf56435aa      |
+|      8000 | oscar     | estrada    | herrera     | 29               | 6141977383 | 31350 | eaho940114      |
+|     10000 | pepe      | picas      | papas       | fresas           | 6149876954 | 02589 | pipape          |
+|     11000 | victor    | silva      | llanas      | ranchomendio     | 6141234567 | 31106 | sillav          |
+|     15610 | Uziel     | Perez      | Campillo    | dolres           | 6251114734 | 1564  | slkdfsjkh       |
+|     52654 | Rodrigo   | Lopez      | Luna        | algun lado       | 6144234234 | 54234 | xddxdxdxdxdxdxd |
+|     53652 | David     | Gonzales   | Tinajero    | Av. Industrias   | 6141234567 | 32145 | GOTD23156FDSFG  |
+|    111111 | Valoo     | Lopez      | Avizpon     | Quinta sebastian | 6391383530 | 3153  | VAL2344         |
+|    117007 | Miguel    | Gonzales   | De la Garza | Pascual          | 614254897  | 32154 | MGDG1545        |
++-----------+-----------+------------+-------------+------------------+------------+-------+-----------------+
+32 rows in set (0.00 sec)
+mysql-sql> \connect -c jair@localhost
+Creating a Classic Session to 'jair@localhost'
+Enter password:
+ERROR: 1045 (28000): Access denied for user 'jair'@'localhost' (using password: NO)
+mysql-sql> \connect -c jair@localhost
+Creating a Classic Session to 'jair@localhost'
+Enter password: ***
+Closing old connection...
+Your MySQL connection id is 4
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mundo              |
+| test               |
++--------------------+
+3 rows in set (0.00 sec)
+mysql-sql> create table comida_mundo(
+       ... comida_id int,
+       ... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACOYOS'),
+       ... precio decimal(10,2));
+ERROR: 1046 (3D000): No database selected
+mysql-sql> \use mundo
+Schema set to `mundo`.
+mysql-sql>  create table comida_mundo(
+       ...        ... comida_id int,
+       ...        ... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACOYOS'),
+       ...
+       ... };
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.. comida_id int,
+... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACO' at line 2
+mysql-sql> create table comida_mundo(
+       ...        ... comida_id int,
+       ...        ... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACOYOS'),
+       ...        ... precio decimal(10,2));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.. comida_id int,
+... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACO' at line 2
+mysql-sql> create table comida_mundo(
+       ...        ... comida_id int,
+       ...        ... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACOYOS'),
+       ...        ... precio decimal(10,2));
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '.. comida_id int,
+... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACO' at line 2
+mysql-sql> create table comida_mundo(comida_id int,
+       ... nombre_comida ENUM('TACOS','BURRITOS','CARNE ASADA','TLACOYOS'),
+       ... precio decimal(10,2));
+Query OK, 0 rows affected (0.26 sec)
+mysql-sql> desc comida_mundo;
++---------------+---------------------------------------------------+------+-----+---------+-------+
+| Field         | Type                                              | Null | Key | Default | Extra |
++---------------+---------------------------------------------------+------+-----+---------+-------+
+| comida_id     | int(11)                                           | YES  |     | null    |       |
+| nombre_comida | enum('TACOS','BURRITOS','CARNE ASADA','TLACOYOS') | YES  |     | null    |       |
+| precio        | decimal(10,2)                                     | YES  |     | null    |       |
++---------------+---------------------------------------------------+------+-----+---------+-------+
+3 rows in set (0.02 sec)
+mysql-sql> insert into comida_mundo values(1,'burritos',10.2);
+Query OK, 1 row affected (0.08 sec)
+mysql-sql> select * from comida_mundo;
++-----------+---------------+--------+
+| comida_id | nombre_comida | precio |
++-----------+---------------+--------+
+|         1 | BURRITOS      |  10.20 |
++-----------+---------------+--------+
+1 row in set (0.00 sec)
+mysql-sql> insert into comida_mundo values(1,'burrotes',10.2);
+Query OK, 1 row affected, 1 warning (0.09 sec)
+Warning (code 1265): Data truncated for column 'nombre_comida' at row 1
+mysql-sql> select * from comida_mundo;
++-----------+---------------+--------+
+| comida_id | nombre_comida | precio |
++-----------+---------------+--------+
+|         1 | BURRITOS      |  10.20 |
+|         1 |               |  10.20 |
++-----------+---------------+--------+
+2 rows in set (0.00 sec)
+mysql-sql> insert into comida_mundo values(1,'CHACALES',10.2);
+Query OK, 1 row affected, 1 warning (0.08 sec)
+Warning (code 1265): Data truncated for column 'nombre_comida' at row 1
+mysql-sql> create table viajero(
+       ... viajero_id int not null,
+       ... articulo varchar(40),
+       ... viaticos decimal(10,2) not null);
+Query OK, 0 rows affected (0.26 sec)
+mysql-sql> insert into viajero values(1,'lentes',10.2);
+Query OK, 1 row affected (0.08 sec)
+mysql-sql> insert into viajero values(,'lentes',10.2);
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''lentes',10.2)' at line 1
+mysql-sql> insert into viajero values(lentes',10.2);
+       ... ;
+       ... );
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '',10.2);
+)' at line 1
+mysql-sql> insert into viajero values(articulo,10.2);
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+mysql-sql>

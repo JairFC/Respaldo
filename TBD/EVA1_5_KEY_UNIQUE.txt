@@ -1,0 +1,164 @@
+MySQL Shell 1.0.11
+
+Copyright (c) 2016, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+Currently in JavaScript mode. Use \sql to switch to SQL mode and execute queries.
+mysql-js> \sql
+Switching to SQL mode... Commands end with ;
+mysql-sql>
+mysql-sql> \connect -c jair@localhost
+Creating a Classic Session to 'jair@localhost'
+Enter password: ***
+Your MySQL connection id is 2
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> \use mundo
+Schema set to `mundo`.
+mysql-sql> create table ciudades(
+       ... ciudades_id int not null auto_increment primary key,
+       ... nombre varchar(50) not null,
+       ... poblacion int);
+Query OK, 0 rows affected (0.20 sec)
+mysql-sql> desc ciudades;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| ciudades_id | int(11)     | NO   | PRI | null    | auto_increment |
+| nombre      | varchar(50) | NO   |     | null    |                |
+| poblacion   | int(11)     | YES  |     | null    |                |
++-------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.02 sec)
+mysql-sql> insert into ciudades(nombre,poblacion)values('CHIHUAHUA','600000');
+Query OK, 1 row affected (0.09 sec)
+mysql-sql> select  * from ciudades;
++-------------+-----------+-----------+
+| ciudades_id | nombre    | poblacion |
++-------------+-----------+-----------+
+|           1 | CHIHUAHUA |    600000 |
++-------------+-----------+-----------+
+1 row in set (0.00 sec)
+mysql-sql> insert into ciudades(poblacion)values(600000);
+Query OK, 1 row affected, 1 warning (0.10 sec)
+Warning (code 1364): Field 'nombre' doesn't have a default value
+mysql-sql> select * from ciudades;
++-------------+-----------+-----------+
+| ciudades_id | nombre    | poblacion |
++-------------+-----------+-----------+
+|           1 | CHIHUAHUA |    600000 |
+|           2 |           |    600000 |
++-------------+-----------+-----------+
+2 rows in set (0.00 sec)
+mysql-sql> create table oceanos(
+       ... oceanos_id int not null key auto_increment,
+       ... nombre varchar(50) unique,
+       ... profundidad_media int default 3000);
+Query OK, 0 rows affected (0.22 sec)
+mysql-sql> desc oceanos;
++-------------------+-------------+------+-----+---------+----------------+
+| Field             | Type        | Null | Key | Default | Extra          |
++-------------------+-------------+------+-----+---------+----------------+
+| oceanos_id        | int(11)     | NO   | PRI | null    | auto_increment |
+| nombre            | varchar(50) | YES  | UNI | null    |                |
+| profundidad_media | int(11)     | YES  |     | 3000    |                |
++-------------------+-------------+------+-----+---------+----------------+
+3 rows in set (0.01 sec)
+mysql-sql> insert into oceanos(nombre, profundidad_media)values('pacifico',4000);
+Query OK, 1 row affected (0.09 sec)
+mysql-sql> insert into oceanos(nombre)values('indico');
+Query OK, 1 row affected (0.09 sec)
+mysql-sql> insert into oceanos(nombre, profundidad_media)values('pacifico',4000);
+ERROR: 1062 (23000): Duplicate entry 'pacifico' for key 'nombre'
+mysql-sql>
+
+
+
+
+
+
+
+MySQL Shell 1.0.11
+
+Copyright (c) 2016, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+Currently in JavaScript mode. Use \sql to switch to SQL mode and execute queries.
+mysql-js> \sql
+Switching to SQL mode... Commands end with ;
+mysql-sql> \connect -c root@localhost
+Creating a Classic Session to 'root@localhost'
+Enter password:
+Your MySQL connection id is 2
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> \use personal
+Schema set to `personal`.
+mysql-sql> show tables;
+Empty set (0.00 sec)
+mysql-sql> create table empleado(
+       ... empleado_id int not null auto_increment primary key,
+       ... apellido varchar(35) not null,
+       ... nombre varchar(35),
+       ... salario_min int default 20000,
+       ... salario_max int,
+       ... departamento ENUM('SISTEMAS','PRODUCCION','HUMANOS','FINANZAS','JEFES'),
+       ... clave_acceso varchar(15));
+Query OK, 0 rows affected (0.21 sec)
+mysql-sql> insert into empleado (apellido,nombre,salario_min,salario_max,departamento) values('Franco','Jair','24000','25500','SISTEMAS','jair123');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+mysql-sql> insert into empleado (apellido,nombre,salario_min,salario_max,departamento) values('Franco','Jair','24000','25500','SISTEMAS','jair123');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+mysql-sql> insert into empleado (empleado_id,apellido,nombre,salario_min,salario_max,departamento) values('1','Franco','Jair','24000','25500','SISTEMAS','jair123');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+mysql-sql> desc empleado
+       ... ;
++--------------+------------------------------------------------------------+------+-----+---------+----------------+
+| Field        | Type                                                       | Null | Key | Default | Extra          |
++--------------+------------------------------------------------------------+------+-----+---------+----------------+
+| empleado_id  | int(11)                                                    | NO   | PRI | null    | auto_increment |
+| apellido     | varchar(35)                                                | NO   |     | null    |                |
+| nombre       | varchar(35)                                                | YES  |     | null    |                |
+| salario_min  | int(11)                                                    | YES  |     | 20000   |                |
+| salario_max  | int(11)                                                    | YES  |     | null    |                |
+| departamento | enum('SISTEMAS','PRODUCCION','HUMANOS','FINANZAS','JEFES') | YES  |     | null    |                |
+| clave_acceso | varchar(15)                                                | YES  |     | null    |                |
++--------------+------------------------------------------------------------+------+-----+---------+----------------+
+7 rows in set (0.02 sec)
+mysql-sql> insert into empleado (apellido,nombre,salario_min,salario_max,departamento,clave_acceso) values('Franco','Jair','24000','25500','SISTEMAS','jair123');
+Query OK, 1 row affected (0.09 sec)
+mysql-sql> select * from empledo;
+ERROR: 1146 (42S02): Table 'personal.empledo' doesn't exist
+mysql-sql> select * from empleado;
++-------------+----------+--------+-------------+-------------+--------------+--------------+
+| empleado_id | apellido | nombre | salario_min | salario_max | departamento | clave_acceso |
++-------------+----------+--------+-------------+-------------+--------------+--------------+
+|           1 | Franco   | Jair   |       24000 |       25500 | SISTEMAS     | jair123      |
++-------------+----------+--------+-------------+-------------+--------------+--------------+
+1 row in set (0.00 sec)
+mysql-sql> insert into empleado (apellido,nombre,salario_min,salario_max,departamento,clave_acceso) values('Franco','Jair','24000','25500','SISTEMAS','jair123');
+Query OK, 1 row affected (0.09 sec)
+
+mysql-sql> insert into empleado (apellido,nombre,salario_max,departamento) values('Franco','Jair','24000','25500','JEFES');
+ERROR: 1136 (21S01): Column count doesn't match value count at row 1
+mysql-sql> insert into empleado (apellido,nombre,salario_max,departamento) values('Franco','Jair','25500','JEFES');
+Query OK, 1 row affected (0.09 sec)
+mysql-sql> select * from empleado;
++-------------+----------+--------+-------------+-------------+--------------+--------------+
+| empleado_id | apellido | nombre | salario_min | salario_max | departamento | clave_acceso |
++-------------+----------+--------+-------------+-------------+--------------+--------------+
+|           1 | Franco   | Jair   |       24000 |       25500 | SISTEMAS     | jair123      |
+|           2 | Franco   | Jair   |       24000 |       25500 | SISTEMAS     | jair123      |
+|           5 | Franco   | Jair   |       20000 |       25500 | JEFES        | null         |
++-------------+----------+--------+-------------+-------------+--------------+--------------+
+3 rows in set (0.00 sec)
+mysql-sql>

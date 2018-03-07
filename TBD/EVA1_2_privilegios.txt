@@ -1,0 +1,78 @@
+MySQL Shell 1.0.11
+
+Copyright (c) 2016, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+Currently in JavaScript mode. Use \sql to switch to SQL mode and execute queries.
+mysql-js> \sql
+Switching to SQL mode... Commands end with ;
+mysql-sql> \connect -c root@localhost
+Creating a Classic Session to 'root@localhost'
+Enter password:
+Your MySQL connection id is 21
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> revoke all privileges grant option from 'prueba2'@'localhost';
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'grant option from 'prueba2'@'localhost'' at line 1
+mysql-sql> revoke all privileges, grant option from 'prueba2'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> grant all on practica2azteca.* to 'prueba2'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> create user 'prueba3'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> revoke all privileges, grant option from 'prueba3'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> grant all on practica2azteca.cliente to 'prueba3'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> create user 'prueba4'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> revoke all privileges, grant option from 'prueba4'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> grant select on practica2azteca.cliente to 'prueba3'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql>
+
+mysql-sql> grant select on practica2azteca.cliente to 'prueba4'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql>
+
+
+mysql-sql> create user 'prueba6'@'localhost';
+Query OK, 0 rows affected (0.01 sec)
+mysql-sql>
+mysql-sql>
+mysql-sql> revoke all privileges, grant option from 'prueba6'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql> grant insert on practica2azteca.empleado to 'prueba3'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql>
+
+MySQL Shell 1.0.11
+
+Copyright (c) 2016, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+Currently in JavaScript mode. Use \sql to switch to SQL mode and execute queries.
+mysql-js> GRANT SELECT (col1), INSERT (col1,col2) ON mydb.mytbl TO 'someuser'@'somehost';
+SyntaxError: Unexpected identifier
+mysql-js> \sql
+Switching to SQL mode... Commands end with ;
+mysql-sql> \connect -c root@localhost
+Creating a Classic Session to 'root@localhost'
+Enter password:
+Your MySQL connection id is 31
+Server version: 10.1.25-MariaDB mariadb.org binary distribution
+No default schema selected; type \use <schema> to set one.
+mysql-sql> GRANT SELECT (nombre) ON practica2azteca.cliente TO 'prueba5'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
+mysql-sql>
